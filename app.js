@@ -12,11 +12,9 @@ const Customer = require("./models/customer");
 
 const connect = async () => {
     await mongoose.connect(process.env.MONGODB_URI);
-
-    getQueries();
 }
 
-function getQueries() {
+function showMenu() {
     console.log("What would you like to do? ");
 
     console.log("1. Create a customer");
@@ -54,6 +52,7 @@ const runQueries = (answer) => {
 }
 
 connect();
+showMenu();
 
 // ----------- Query functions -----------
 async function createCustomer() {
@@ -70,7 +69,7 @@ async function createCustomer() {
 
     console.log(`Customer Document created: `, customerDocument);
 
-    getQueries();
+    showMenu();
 }
 
 async function viewAllCustomers() {
@@ -81,7 +80,7 @@ async function viewAllCustomers() {
         console.log(`id: ${customerDocument._id} -- Name: ${customerDocument.name}, Age: ${customerDocument.age}`);
     });
 
-    getQueries();
+    showMenu();
 }
 
 async function updateACustomer() {
@@ -105,7 +104,7 @@ async function updateACustomer() {
     );
     console.log("Updated!");
 
-    getQueries();
+    showMenu();
 }
 
 async function deleteACustomer() {
@@ -122,7 +121,7 @@ async function deleteACustomer() {
     await Customer.findByIdAndDelete(deleteCustomerId);
     console.log("Deleted!");
 
-    getQueries();
+    showMenu();
 }
 
 async function quit() {
